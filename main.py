@@ -113,7 +113,7 @@ class MiMotionRunner:
         else:
             self.is_phone = False
         self.user = user
-        self.fake_ip_addr = "27.8.162.241"
+        self.fake_ip_addr = fake_ip()
         self.log_str += f"创建虚拟ip地址：{self.fake_ip_addr}\n"
 
     # 登录
