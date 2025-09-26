@@ -123,21 +123,29 @@ class MiMotionRunner:
         login_headers = {
             "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
             "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 14_7_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1.2",
-            "X-Forwarded-For": self.fake_ip_addr
+            # "X-Forwarded-For": self.fake_ip_addr,
+            "accept": "application/json, text/plain, /",
+            "accept-language": "zh",
+            "app_name": "com.huami.webapp",
+            "lang": "zh",
         }
         data1 = {
             "client_id": "HuaMi",
             "password": f"{self.password}",
             "redirect_uri": "https://s3-us-west-2.amazonaws.com/hm-registration/successsignin.html",
+            "country_code": "CN",
+            "json_response": "true",
+            "name": f"{self.user}",
+            "state": "REDIRECTION",
             "token": "access"
         }
         r1 = requests.post(url1, data=data1, headers=login_headers, allow_redirects=False)
-        if r1.status_code != 303:
+        if r1.status_code != 200:
             self.log_str += "登录异常，status: %d\n" % r1.status_code
             return 0, 0
-        location = r1.headers["Location"]
+        res_json = json.loads(r1.text)
         try:
-            code = get_access_token(location)
+            code = res_json.get("access")
             if code is None:
                 self.log_str += "获取accessToken失败\n"
                 return 0, 0
