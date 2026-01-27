@@ -196,7 +196,7 @@ def push_to_push_plus(exec_results, summary, config: PushConfig):
                 else:
                     html += f'<li><span>账号：{exec_result["user"]}</span>刷步数失败，失败原因：{exec_result["msg"]}</li>'
             html += '</ul>'
-        push_plus(config.push_plus_token, f"{format_now()} 刷步数通知", html)
+        push_plus(config.push_plus_token, "刷步数"+summary, html)
     else:
         print("未配置 PUSH_PLUS_TOKEN 跳过PUSHPLUS推送")
 

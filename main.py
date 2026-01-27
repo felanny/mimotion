@@ -235,7 +235,7 @@ def execute():
             push_results.append(result)
             if result['success'] is True:
                 success_count += 1
-        summary = f"\n执行账号总数{total}，成功：{success_count}，失败：{total - success_count}"
+        summary = f"\n总数{total},成功{success_count},失败{total - success_count}"
         print(summary)
         push_util.push_results(push_results, summary, push_config)
     else:
