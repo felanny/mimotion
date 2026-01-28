@@ -137,8 +137,8 @@ def push_telegram_bot(bot_token, chat_id, content):
 
 def push_results(exec_results, summary, config: PushConfig):
     """推送所有结果"""
-    # if not_in_push_time_range(config):
-        # return
+    if not_in_push_time_range(config):
+        return
     push_to_push_plus(exec_results, summary, config)
     push_to_wechat_webhook(exec_results, summary, config)
     push_to_telegram_bot(exec_results, summary, config)
