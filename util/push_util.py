@@ -137,8 +137,8 @@ def push_telegram_bot(bot_token, chat_id, content):
 
 def push_results(exec_results, summary, config: PushConfig):
     """推送所有结果"""
-    if not_in_push_time_range(config):
-        return
+    # if not_in_push_time_range(config):
+        # return
     push_to_push_plus(exec_results, summary, config)
     push_to_wechat_webhook(exec_results, summary, config)
     push_to_telegram_bot(exec_results, summary, config)
@@ -196,7 +196,7 @@ def push_to_push_plus(exec_results, summary, config: PushConfig):
                 else:
                     html += f'<li><span>账号：{exec_result["user"]}</span>刷步数失败，失败原因：{exec_result["msg"]}</li>'
             html += '</ul>'
-        push_plus(config.push_plus_token, "刷步数"+summary, html)
+        push_plus(config.push_plus_token, f"刷步数{summary}", html)
     else:
         print("未配置 PUSH_PLUS_TOKEN 跳过PUSHPLUS推送")
 
