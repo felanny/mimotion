@@ -54,7 +54,7 @@ def push_plus(token, title, content):
         response = requests.post(requestUrl, data=data)
         if response.status_code == 200:
             json_res = response.json()
-            print(f"pushplus推送完毕：{json_res['code']}-{json_res['msg']}")
+            print(f"pushplus推送完毕：{json_res}")
         else:
             print("pushplus推送失败")
     except requests.exceptions.RequestException as e:
